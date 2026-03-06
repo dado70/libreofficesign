@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry"
+                    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                    oor:name="Addons"
+                    oor:package="org.openoffice.Office">
+
+    <node oor:name="AddonUI">
+
+        <!-- ============================================================ -->
+        <!-- Menu principale nella barra dei menu di LibreOffice          -->
+        <!-- ============================================================ -->
+        <node oor:name="OfficeMenuBar">
+            <node oor:name="com.sifirma.sign.menu" oor:op="replace">
+                <prop oor:name="Title" oor:type="xs:string">
+                    <value xml:lang="it">SiFirma</value>
+                    <value xml:lang="en">SiFirma</value>
+                </prop>
+                <prop oor:name="Target" oor:type="xs:string">
+                    <value>_self</value>
+                </prop>
+                <node oor:name="Submenu">
+
+                    <!-- Pannello Amministrazione -->
+                    <node oor:name="m1" oor:op="replace">
+                        <prop oor:name="URL" oor:type="xs:string">
+                            <value>service:com.sifirma.sign.Job?ConfigureAdmin</value>
+                        </prop>
+                        <prop oor:name="Title" oor:type="xs:string">
+                            <value xml:lang="it">Pannello Amministrazione...</value>
+                            <value xml:lang="en">Administration Panel...</value>
+                        </prop>
+                        <prop oor:name="Target" oor:type="xs:string">
+                            <value>_self</value>
+                        </prop>
+                    </node>
+
+                    <!-- Separatore -->
+                    <node oor:name="m2" oor:op="replace">
+                        <prop oor:name="URL" oor:type="xs:string">
+                            <value>private:separator</value>
+                        </prop>
+                    </node>
+
+                    <!-- Avvia Firma Documento -->
+                    <node oor:name="m3" oor:op="replace">
+                        <prop oor:name="URL" oor:type="xs:string">
+                            <value>service:com.sifirma.sign.Job?StartSigning</value>
+                        </prop>
+                        <prop oor:name="Title" oor:type="xs:string">
+                            <value xml:lang="it">Avvia Firma Documento...</value>
+                            <value xml:lang="en">Start Document Signing...</value>
+                        </prop>
+                        <prop oor:name="Target" oor:type="xs:string">
+                            <value>_self</value>
+                        </prop>
+                    </node>
+
+                    <!-- Separatore -->
+                    <node oor:name="m4" oor:op="replace">
+                        <prop oor:name="URL" oor:type="xs:string">
+                            <value>private:separator</value>
+                        </prop>
+                    </node>
+
+                    <!-- Verifica Stato Processo -->
+                    <node oor:name="m5" oor:op="replace">
+                        <prop oor:name="URL" oor:type="xs:string">
+                            <value>service:com.sifirma.sign.Job?CheckStatus</value>
+                        </prop>
+                        <prop oor:name="Title" oor:type="xs:string">
+                            <value xml:lang="it">Verifica Stato Processo...</value>
+                            <value xml:lang="en">Check Process Status...</value>
+                        </prop>
+                        <prop oor:name="Target" oor:type="xs:string">
+                            <value>_self</value>
+                        </prop>
+                    </node>
+
+                </node>
+            </node>
+        </node>
+
+        <!-- ============================================================ -->
+        <!-- Pulsante nella toolbar (accesso rapido alla firma)           -->
+        <!-- ============================================================ -->
+        <node oor:name="OfficeToolBar">
+            <node oor:name="com.sifirma.sign.toolbar" oor:op="replace">
+                <node oor:name="t1" oor:op="replace">
+                    <prop oor:name="URL" oor:type="xs:string">
+                        <value>service:com.sifirma.sign.Job?StartSigning</value>
+                    </prop>
+                    <prop oor:name="Title" oor:type="xs:string">
+                        <value xml:lang="it">Avvia Firma SiFirma</value>
+                        <value xml:lang="en">Start SiFirma Signing</value>
+                    </prop>
+                    <prop oor:name="Target" oor:type="xs:string">
+                        <value>_self</value>
+                    </prop>
+                </node>
+            </node>
+        </node>
+
+    </node>
+</oor:component-data>

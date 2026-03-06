@@ -1,0 +1,370 @@
+
+╭─── Claude Code v2.1.69 ──────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│              Welcome back Alessandro!              │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ Recent activity         │
+│                        ▘▘ ▝▝                       │ No recent activity      │
+│                                                    │                         │
+│   Sonnet 4.6 · Claude Pro · dado70@gmail.com's     │                         │
+│   Organization                                     │                         │
+│ ~/…/Progetti/libreoffice-sifirma/code/sifirma-sign │                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ rileggi tutti i file presenti nella directory del progetto.               
+  lo scopo del progetto: scrivere una extension installabile su libreoffice 
+   (linux e window) che permetta, dato un documento a video, completo dei   
+  necessari tag, di inviarlo al software SiFirma per la firma elettornica   
+                                                                            
+  sito di riferiemtno di sifirma: https://aliasdigital.it/sifirma/          
+                                                                            
+  il plug in deve solo avviare il processo di firma secondo le funzionalità 
+   offerte dall webapi di si firma qi descritte https://sifirmawebapi.alias 
+  grouplab.it/docs/index.html?urls.primaryName=V2 e secondo questo manuale  
+  https://aliasdigital.it/manuale-utente/sifirma/1/it/topic/integrazione-vi 
+  a-web-api                                                                 
+                                                                            
+  inserisci tutti i necessari controlli e valuta un pannello di             
+  amministrazione dove andare ad inserire i dati di configurazione del      
+  servizio di sifirma                                                       
+                                                                            
+
+● Recalled 1 memory, searched for 2 patterns, read 7 files (ctrl+o to expand)
+
+● Ora ho letto tutti i file esistenti. Il progetto è già una versione per
+  DocEasy. Devo ora adattarlo per SiFirma. Prima recupero la documentazione
+  dell'API SiFirma.
+
+● Fetch(https://sifirmawebapi.aliasgrouplab.it/docs/index.html?urls.primaryName=
+       V2)
+  ⎿  Received 7.3KB (200 OK)
+
+● Fetch(https://aliasdigital.it/manuale-utente/sifirma/1/it/topic/integrazione-v
+       ia-web-api)
+  ⎿  Received 37.5KB (200 OK)
+
+● Fetch(https://sifirmawebapi.aliasgrouplab.it/swagger/v2/swagger.json)
+  ⎿  Received 73.6KB (200 OK)
+
+● Fetch(https://sifirmawebapi.aliasgrouplab.it/swagger/v2/swagger.json)
+  ⎿  Received 73.6KB (200 OK)
+
+● Ora ho tutti i dettagli necessari. Creo la nuova estensione SiFirma completa
+  con pannello admin, gestione firmatari, validazioni e integrazione WebAPI V2.
+
+● Write(sifirma_sign.py)
+  ⎿  Wrote 1016 lines to sifirma_sign.py
+       1 """
+       2 SiFirma Sign - Estensione LibreOffice
+       3 Integrazione con SiFirma WebAPI V2 per l'avvio di processi di fi
+         rma elettronica.
+       4 
+       5 Flusso principale:
+       6   1. L'utente configura le credenziali nel Pannello Amministrazi
+         one
+       7   2. Il documento aperto (con eventuali tag per il posizionament
+         o firma) viene
+       8      esportato in PDF e inviato all'API SiFirma tramite POST /ap
+         i/v2/processofirma/avvia
+       9   3. SiFirma avvia il processo e notifica i firmatari via email 
+         (opzionale)
+      10 """
+     … +1006 lines (ctrl+o to expand)
+
+● Write(Addons.xcu)
+  ⎿  Wrote 104 lines to Addons.xcu
+       1 <?xml version="1.0" encoding="UTF-8"?>
+       2 <oor:component-data xmlns:oor="http://openoffice.org/2001/regist
+         ry"
+       3                     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+       4                     oor:name="Addons"
+       5                     oor:package="org.openoffice.Office">
+       6 
+       7     <node oor:name="AddonUI">
+       8 
+       9         <!-- ===================================================
+         ========= -->
+      10         <!-- Menu principale nella barra dei menu di LibreOffice
+                   -->
+     … +94 lines (ctrl+o to expand)
+
+● Write(description.xml)
+  ⎿  Wrote 29 lines to description.xml
+       1 <?xml version="1.0" encoding="UTF-8"?>
+       2 <description xmlns="http://openoffice.org/extensions/description
+         /2006"
+       3              xmlns:d="http://openoffice.org/extensions/descripti
+         on/2006"
+       4              xmlns:xlink="http://www.w3.org/1999/xlink">
+       5 
+       6     <identifier value="com.sifirma.sign"/>
+       7 
+       8     <version value="1.0.0"/>
+       9 
+      10     <display-name>
+     … +19 lines (ctrl+o to expand)
+
+● Write(META-INF/manifest.xml)
+  ⎿  Wrote 9 lines to META-INF/manifest.xml
+      1 <?xml version="1.0" encoding="UTF-8"?>
+      2 <manifest:manifest xmlns:manifest="http://openoffice.org/2001/man
+        ifest">
+      3     <manifest:file-entry
+      4         manifest:media-type="application/vnd.sun.star.uno-compone
+        nt;type=Python"
+      5         manifest:full-path="sifirma_sign.py"/>
+      6     <manifest:file-entry
+      7         manifest:media-type="application/vnd.sun.star.configurati
+        on-data"
+      8         manifest:full-path="Addons.xcu"/>
+      9 </manifest:manifest>
+
+● Write(description-it.txt)
+  ⎿  Wrote 13 lines to description-it.txt
+       1 SiFirma Sign permette di avviare processi di firma elettronica d
+         irettamente
+       2 da LibreOffice, inviando il documento corrente al servizio SiFir
+         ma tramite
+       3 la WebAPI V2.
+       4 
+       5 Funzionalita':
+       6 - Esportazione automatica del documento in PDF
+       7 - Supporto per firma FES, FEA e FEQ
+       8 - Posizionamento firma tramite tag nel documento (MarcatoriV2), 
+         coordinate o acrofield
+       9 - Gestione di piu' firmatari per ogni processo
+      10 - Invio notifiche email automatiche ai firmatari
+     … +3 lines (ctrl+o to expand)
+
+● Write(description-en.txt)
+  ⎿  Wrote 12 lines to description-en.txt
+       1 SiFirma Sign allows you to start electronic signing processes di
+         rectly from
+       2 LibreOffice, sending the current document to the SiFirma service
+          via WebAPI V2.
+       3 
+       4 Features:
+       5 - Automatic document export to PDF
+       6 - Support for FES, FEA and FEQ signature types
+       7 - Signature placement via document tags (MarcatoriV2), coordinat
+         es or acrofields
+       8 - Multiple signatories per signing process
+       9 - Automatic email notifications to signatories
+      10 - Signing process status verification
+     … +2 lines (ctrl+o to expand)
+
+● Ora creo uno script di build per generare il file .oxt installabile:
+
+● Write(build.sh)
+  ⎿  Wrote 40 lines to build.sh
+       1 #!/bin/bash
+       2 # Script per generare il file .oxt installabile su LibreOffice
+       3 # Uso: cd sifirma-sign && ./build.sh
+       4 
+       5 EXTENSION_NAME="SiFirmaSign"
+       6 OUTPUT_FILE="../${EXTENSION_NAME}.oxt"
+       7 
+       8 echo "Compilazione estensione ${EXTENSION_NAME}..."
+       9 
+      10 # Elimina eventuale versione precedente
+     … +30 lines (ctrl+o to expand)
+
+● Bash(chmod +x /home/dado/Documenti/Progetti/libreoffice-sifirma/code/sifirma-s
+      ign/build.sh)
+  ⎿  Done
+
+● Verifico la struttura finale e genero l'estensione:
+
+● Searched for 1 pattern (ctrl+o to expand)
+
+● Bash(cd /home/dado/Documenti/Progetti/libreoffice-sifirma/code/sifirma-sign &&
+       bash build.sh)
+  ⎿  Compilazione estensione SiFirmaSign...
+       adding: META-INF/ (stored 0%)
+       adding: META-INF/manifest.xml (deflated 50%)
+     … +13 lines (ctrl+o to expand)
+
+● L'estensione SiFirmaSign.oxt e' stata creata. Ecco un riepilogo completo del
+  lavoro:
+
+  ---
+  Estensione SiFirma Sign - Riepilogo
+
+  Struttura creata
+
+  sifirma-sign/
+  ├── META-INF/manifest.xml       # Manifest dell'estensione
+  ├── sifirma_sign.py             # Script principale (logica completa)
+  ├── Addons.xcu                  # Configurazione menu LibreOffice
+  ├── description.xml             # Metadati estensione
+  ├── description-it.txt          # Descrizione italiana
+  ├── description-en.txt          # Descrizione inglese
+  └── build.sh                    # Script di build → SiFirmaSign.oxt
+
+  SiFirmaSign.oxt                 # File installabile (pronto)
+
+  Funzionalita' implementate
+
+  Menu SiFirma con 3 voci:
+  1. Pannello Amministrazione - Configura le credenziali e le impostazioni
+  2. Avvia Firma Documento - Lancia il processo di firma
+  3. Verifica Stato Processo - Controlla lo stato tramite UID
+
+  Pannello Amministrazione (ConfigureAdmin):
+  - URL API SiFirma (con default al test environment)
+  - API Key, API Secret
+  - Partita IVA / Codice Fiscale
+  - Tipo firma default (FES/FEA/FEQ)
+  - Tipo posizionamento firma (Coordinate / Acrofield / MarcatoriV2 per i tag
+  nel documento)
+  - Giorni scadenza default
+  - Invia email ai firmatari
+  - URL redirect post-firma e WebHook callback
+  - Pulsante "Testa Connessione" → verifica via GET /api/v2/info/versioni
+
+  Dialog Avvia Firma (StartSigning):
+  - Nome processo e nome file PDF
+  - Data scadenza (pre-calcolata dai giorni configurati)
+  - Tipo firma (modificabile per ogni processo)
+  - Dati Firmatario 1 (obbligatorio): Nome, Cognome, CF, Email, Telefono
+  - Dati Firmatario 2 (opzionale): stessi campi
+
+  Controlli e validazioni:
+  - Verifica configurazione completa prima di qualsiasi operazione
+  - Verifica documento aperto e tipo supportato (Writer/Calc/Impress)
+  - Validazione data scadenza (formato e futura)
+  - Validazione firmatari (nome+cognome + CF o email obbligatori)
+  - Gestione errori HTTP con estrazione del corpo della risposta
+  - File config salvato con permessi 600 (solo utente proprietario)
+
+  API SiFirma utilizzate (WebAPI V2)
+
+  ┌──────────────────────────────────┬──────────────────────┐
+  │             Endpoint             │         Uso          │
+  ├──────────────────────────────────┼──────────────────────┤
+  │ GET /api/v2/info/versioni        │ Test connessione     │
+  ├──────────────────────────────────┼──────────────────────┤
+  │ POST /api/v2/processofirma/avvia │ Avvio processo firma │
+  ├──────────────────────────────────┼──────────────────────┤
+  │ GET /api/v2/processofirma/{uid}  │ Verifica stato       │
+  └──────────────────────────────────┴──────────────────────┘
+
+  Installazione
+
+  # Da riga di comando
+  unopkg add SiFirmaSign.oxt
+
+  # O da LibreOffice: Strumenti > Gestione estensioni > Aggiungi
+
+✻ Churned for 7m 59s
+
+❯ /export 
+  ⎿  Conversation exported to:
+     2026-03-05-193234-rileggi-tutti-i-file-presenti-nella-directory-del.txt
+
+❯ ho installato l'estensione e riavviato libreoffice (Version: 24.2.7.2     
+  (X86_64) / LibreOffice Community                                          
+  Build ID: 420(Build:2)                                                    
+  CPU threads: 8; OS: Linux 6.8; UI render: default; VCL: gtk3              
+  Locale: it-IT (it_IT.UTF-8); UI: it-IT                                    
+  Ubuntu package version: 4:24.2.7-0ubuntu0.24.04.4                         
+  Calc: threaded) è apparso il mnù sifirma con 3 scelte: Pannello di        
+  Amministrazione, Avvia Firma Documento, Verifica Stato Processo.          
+  cliccando su Pannello di Amministrazione, non si apre nessuna finestra    
+  ove inserire i parametri di Sifirma                                       
+
+● Il problema classico: i dialog UNO creati programmaticamente richiedono che
+  venga chiamato createPeer prima di execute(), altrimenti non vengono
+  visualizzati. Correggo tutti i dialog dell'estensione.
+
+● Update(sifirma_sign.py)
+  ⎿  Added 12 lines
+      935      # HELPER COSTRUZIONE DIALOG MODEL
+      936      # --------------------------------------------------------
+           ---------------
+      937  
+      938 +    def _execute_dialog(self, dialog):                        
+      939 +        """                                                   
+      940 +        Crea il peer della finestra e mostra il dialog in modo
+          + modale.                                                      
+      941 +        Il createPeer e' OBBLIGATORIO per i dialog creati prog
+          +rammaticamente                                                
+      942 +        in LibreOffice: senza di esso il dialog non viene visu
+          +alizzato.                                                     
+      943 +        """                                                   
+      944 +        toolkit = self.smgr.createInstanceWithContext(        
+      945 +            "com.sun.star.awt.Toolkit", self.ctx              
+      946 +        )                                                     
+      947 +        dialog.createPeer(toolkit, None)                      
+      948 +        return dialog.execute()                               
+      949 +                                                              
+      950      def _new_dialog_model(self, width, height, title):
+      951          dm = self.smgr.createInstanceWithContext(
+      952              "com.sun.star.awt.UnoControlDialogModel", self.ctx
+
+● Ora sostituisco tutte le chiamate dialog.execute() con
+  self._execute_dialog(dialog):
+
+● Update(sifirma_sign.py)
+  ⎿  Added 1 line, removed 1 line
+      133          """Mostra il pannello di amministrazione/configurazion
+           e."""
+      134          config = self.load_config()
+      135          dialog = self._build_admin_dialog(config)
+      136 -        result = dialog.execute()                             
+      136 +        result = self._execute_dialog(dialog)                 
+      137          if result == 1:  # OK / Salva
+      138              new_config = self._read_admin_dialog(dialog, confi
+           g)
+      139              errors = self._validate_config_values(new_config)
+
+● Update(sifirma_sign.py)
+  ⎿  Added 1 line, removed 1 line
+      416          ).strftime("%Y-%m-%d")
+      417  
+      418          dialog = self._build_signing_dialog(config, doc_name, 
+           scadenza_default)
+      419 -        result = dialog.execute()                             
+      419 +        result = self._execute_dialog(dialog)                 
+      420  
+      421          if result != 1:
+      422              dialog.dispose()
+
+● Update(sifirma_sign.py)
+  ⎿  Added 1 line, removed 1 line
+      730              return
+      731  
+      732          dialog = self._build_status_dialog()
+      733 -        result = dialog.execute()                             
+      733 +        result = self._execute_dialog(dialog)                 
+      734          if result != 1:
+      735              dialog.dispose()
+      736              return
+
+● Ora ricostruisco il file .oxt e fornisco le istruzioni per reinstallare:
+
+● Bash(bash build.sh)
+  ⎿  Compilazione estensione SiFirmaSign...
+       adding: META-INF/ (stored 0%)
+       adding: META-INF/manifest.xml (deflated 50%)
+     … +13 lines (ctrl+o to expand)
+
+● Causa del problema: i dialog UNO creati programmaticamente in Python
+  richiedono che venga chiamato createPeer(toolkit, None) prima di execute().
+  Senza questo passaggio, il dialog viene costruito in memoria ma non viene mai
+  visualizzato a schermo.
+
+  Per aggiornare l'estensione, da terminale:
+
+  # Rimuovi la versione precedente
+  unopkg remove com.sifirma.sign
+
+  # Installa la nuova
+  unopkg add
+  /home/dado/Documenti/Progetti/libreoffice-sifirma/code/SiFirmaSign.oxt
+
+  Poi riavvia LibreOffice. Alternativamente dal menu Strumenti > Gestione 
+  estensioni: rimuovi "SiFirma Sign" e aggiungi il nuovo .oxt.
+
+✻ Cooked for 1m 8s

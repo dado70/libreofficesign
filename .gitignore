@@ -1,0 +1,25 @@
+# File temporanei SiFirma
+.sifirma_config.json
+.sifirma_temp/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Build artifacts
+*.oxt
+
+# Editor e OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Cartella vecchia non usata
+doceasy-sign-oldnonusare/

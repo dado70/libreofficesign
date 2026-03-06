@@ -1,0 +1,13 @@
+SiFirma Sign permette di avviare processi di firma elettronica direttamente
+da LibreOffice, inviando il documento corrente al servizio SiFirma tramite
+la WebAPI V2.
+
+Funzionalita':
+- Esportazione automatica del documento in PDF
+- Supporto per firma FES, FEA e FEQ
+- Posizionamento firma tramite tag nel documento (MarcatoriV2), coordinate o acrofield
+- Gestione di piu' firmatari per ogni processo
+- Invio notifiche email automatiche ai firmatari
+- Verifica stato processo di firma
+- Pannello di amministrazione per la configurazione del servizio
+- Compatibile con LibreOffice Writer, Calc e Impress

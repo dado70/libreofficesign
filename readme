@@ -1,0 +1,9 @@
+rileggi tutti i file presenti nella directory del progetto. 
+lo scopo del progetto: scrivere una extension installabile su libreoffice (linux e window) che permetta, dato un documento a video, completo dei necessari tag, di inviarlo al software SiFirma per la firma elettornica
+
+sito di riferiemtno di sifirma: https://aliasdigital.it/sifirma/
+
+il plug in deve solo avviare il processo di firma secondo le funzionalità offerte dall webapi di si firma qi descritte https://sifirmawebapi.aliasgrouplab.it/docs/index.html?urls.primaryName=V2 e secondo questo manuale https://aliasdigital.it/manuale-utente/sifirma/1/it/topic/integrazione-via-web-api
+
+inserisci tutti i necessari controlli e valuta un pannello di amministrazione dove andare ad inserire i dati di configurazione del servizio di sifirma
+
