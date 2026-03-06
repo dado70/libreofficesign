@@ -25,7 +25,7 @@ Estensione LibreOffice per avviare processi di **firma elettronica** direttament
 
 Per attivare il servizio SiFirma e ottenere le credenziali API necessarie all'utilizzo di questa estensione, visita:
 
-**[https://www.eldataservizi.it/sifirma](https://www.eldataservizi.it/sifirma)**
+**[https://www.eldataservizi.it/services/sifirma](https://www.eldataservizi.it/services/sifirma)**
 
 ---
 
