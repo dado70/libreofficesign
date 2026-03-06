@@ -14,7 +14,7 @@ Estensione LibreOffice per avviare processi di **firma elettronica** direttament
 
 - **Firma Elettronica Semplice (FES)** - per firme di uso generale
 - **Firma Elettronica Avanzata (FEA)** - conforme alla normativa vigente, inclusa in tutti i piani
-- **Firma Elettronica Qualificata (FEQ)** - massimo livello di sicurezza e validita' legale
+- **Firma Elettronica Qualificata (FEQ)** - massimo livello di sicurezza e validita' legale. Non ancora possibile a causa di restrizioni normative
 - **Autenticazione OTP** - firma protetta tramite codice One-Time Password
 - **Marche temporali** - incluse in tutte le licenze
 - **Utenti e firmatari illimitati** (piano Small Business)
